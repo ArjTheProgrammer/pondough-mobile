@@ -6,7 +6,7 @@ import 'package:pondough_mobile/screens/agent_screen.dart';
 import 'package:pondough_mobile/screens/savings_screen.dart';
 import 'package:pondough_mobile/screens/accounts_screen.dart';
 import '../constants.dart';
-import '../widgets/custom_font.dart';
+// import '../widgets/custom_font.dart';
 import '../widgets/nav_item.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -23,16 +23,6 @@ class _HomeState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        shadowColor: FB_TEXT_COLOR_WHITE,
-        elevation: 2,
-        title: CustomFont(
-          text: 'Pondough',
-          fontSize: ScreenUtil().setSp(25),
-          color: FB_PRIMARY,
-          fontFamily: 'Klavika',
-        ),
-      ),
       body: PageView(
         controller: _pageController,
         children: const <Widget>[
