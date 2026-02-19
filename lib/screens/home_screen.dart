@@ -7,6 +7,7 @@ import 'package:pondough_mobile/screens/savings_screen.dart';
 import 'package:pondough_mobile/screens/accounts_screen.dart';
 import '../constants.dart';
 import '../widgets/custom_font.dart';
+import '../widgets/nav_item.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -51,11 +52,7 @@ class _HomeState extends State<HomeScreen> {
         onPressed: () => _onTappedBar(2),
         backgroundColor: _selectedIndex == 2 ? FB_PRIMARY : FB_SECONDARY,
         shape: const CircleBorder(),
-        child: Icon(
-          Icons.mic,
-          size: 32,
-          color: FB_TEXT_COLOR_WHITE,
-        ),
+        child: Icon(Icons.mic, size: 32, color: FB_TEXT_COLOR_WHITE),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
@@ -66,42 +63,33 @@ class _HomeState extends State<HomeScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _buildNavItem(Icons.receipt_long, 'Transactions', 0),
-              _buildNavItem(Icons.bar_chart, 'Stats', 1),
+              NavItem(
+                icon: Icons.receipt_long,
+                label: 'Transactions',
+                isSelected: _selectedIndex == 0,
+                onTap: () => _onTappedBar(0),
+              ),
+              NavItem(
+                icon: Icons.bar_chart,
+                label: 'Stats',
+                isSelected: _selectedIndex == 1,
+                onTap: () => _onTappedBar(1),
+              ),
               SizedBox(width: 80.w), // Space for FAB
-              _buildNavItem(Icons.savings, 'Savings', 3),
-              _buildNavItem(Icons.account_balance_wallet, 'Accounts', 4),
+              NavItem(
+                icon: Icons.savings,
+                label: 'Savings',
+                isSelected: _selectedIndex == 3,
+                onTap: () => _onTappedBar(3),
+              ),
+              NavItem(
+                icon: Icons.account_balance_wallet,
+                label: 'Accounts',
+                isSelected: _selectedIndex == 4,
+                onTap: () => _onTappedBar(4),
+              ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildNavItem(IconData icon, String label, int index) {
-    final isSelected = _selectedIndex == index;
-    return Expanded(
-      child: InkWell(
-        onTap: () => _onTappedBar(index),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              icon,
-              color: isSelected ? FB_PRIMARY : Colors.grey,
-              size: ScreenUtil().setSp(24),
-            ),
-            SizedBox(height: 4.h),
-            Text(
-              label,
-              style: TextStyle(
-                color: isSelected ? FB_PRIMARY : Colors.grey,
-                fontSize: ScreenUtil().setSp(10),
-                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-              ),
-            ),
-          ],
         ),
       ),
     );
@@ -113,7 +101,7 @@ class _HomeState extends State<HomeScreen> {
     });
     _pageController.animateToPage(
       value,
-      duration: const Duration(milliseconds: 100),
+      duration: const Duration(milliseconds: 50),
       curve: Curves.easeInOut,
     );
   }
